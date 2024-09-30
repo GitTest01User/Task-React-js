@@ -12,12 +12,13 @@ app.get("/Status", (req, res) => {
     res.status(200).send("Hello World")
 })
 
+// Serve static files from the 'build' directory of the frontend
+app.use(express.static(path.join(__dirname, 'Frontend', 'build')));
 
-app.use(express.static(path.join(__dirname, 'Frontend', 'build')))
-
-app.get("/frontend/", (req, res) => {
-    res.sendFile(path.resolve(__dirname, 'Frontend', 'build', "index.html"))
-})
+// Catch-all route to handle client-side routing for React (SPA)
+app.get("/*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'Frontend', 'build', 'index.html'));
+});
 
 app.use("/Status", Routes)
 
