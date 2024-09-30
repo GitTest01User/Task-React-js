@@ -15,7 +15,7 @@ app.get("/Status", (req, res) => {
 
 app.use(express.static(path.join(__dirname, 'Frontend', 'build')))
 
-app.get("/frontend/", (req, res) => {
+app.get("*", (req, res) => {
     res.sendFile(path.resolve(__dirname, 'Frontend', 'build', "index.html"))
 })
 
