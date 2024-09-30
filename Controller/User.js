@@ -20,30 +20,30 @@ UserListGet = async (req, res) => {
         if (age) {
             WhereClose.age = parseInt(age)
         }
-        let Users;
+        let User;
         if (Object.keys(WhereClose).length > 0) {
-            Users = await Prisma.users.findMany({
+            User = await Prisma.Users.findMany({
                 where: WhereClose
             })
 
             res.status(201).send({
                 Status: true,
-                Massage: 'Users List Get Value!',
-                Result: Users
+                Massage: 'User List Get Value!',
+                Result: User
             })
         } else {
-            Users = await Prisma.users.findMany()
+            User = await Prisma.Users.findMany()
             res.status(201).send({
                 Status: true,
-                Massage: 'Users List Get Value!',
-                Result: Users
+                Massage: 'User List Get Value!',
+                Result: User
             })
         }
 
     } catch (error) {
         res.status(400).send({
             Status: false,
-            Massage: 'Users List Not Get Value!',
+            Massage: 'User List Not Get Value!',
 
         })
     }
@@ -71,26 +71,26 @@ UserListPost = async (req, res) => {
                 Massage: 'User is Not Provide email value !'
             })
         }
-        let UsersCreate;
+        let UserCreate;
         if (name && age && email) {
-            UsersCreate = await Prisma.users.create({
+            UserCreate = await Prisma.Users.create({
                 data: {
                     name: name,
                     age: age,
                     email: email
                 }
             })
-            console.log('UsersCreate', UsersCreate)
+            console.log('UserCreate', UserCreate)
             res.status(201).send({
                 Status: true,
                 Massage: 'User Was Create Successfully !',
-                Result: UsersCreate
+                Result: UserCreate
             })
         } else {
 
             res.status(400).send({
                 Status: false,
-                Message: 'Users Not Create Con You Pleace Provide Body!',
+                Message: 'User Not Create Con You Pleace Provide Body!',
 
             })
         }
@@ -116,7 +116,7 @@ UserListUpdate = async (req, res) => {
         }
         let UserUpdate;
         if (Object.keys(WhereCloseUpdate).length > 0) {
-            UserUpdate = await Prisma.users.update({
+            UserUpdate = await Prisma.Users.update({
                 where: WhereCloseUpdate,
                 data: {
                     name: name,
@@ -135,7 +135,7 @@ UserListUpdate = async (req, res) => {
         } else {
             res.status(400).send({
                 Status: false,
-                Message: 'Users Not Updated Con You Pleace Provide Id !',
+                Message: 'User Not Updated Con You Pleace Provide Id !',
 
             })
 
@@ -166,7 +166,7 @@ UserListFullUpdate = async (req, res) => {
         let UserUpdateFull;
 
         if (Object.keys(whereCloseFullUpdate).length > 0) {
-            UserUpdateFull = await Prisma.users.update({
+            UserUpdateFull = await Prisma.Users.update({
                 where: req.query.id,
                 data: {
                     name: name,
@@ -213,12 +213,12 @@ UserListDelete = async (req, res) => {
 
         let UserDelete;
         if (Object.keys(WhereCloseDelete).length > 0) {
-            UserDelete = await Prisma.users.delete({
+            UserDelete = await Prisma.Users.delete({
                 where: WhereCloseDelete
             })
             res.status(201).send({
                 Status: true,
-                Message: 'Users Deleted By Id!',
+                Message: 'User Deleted By Id!',
                 Result: UserDelete
             })
 
@@ -227,7 +227,7 @@ UserListDelete = async (req, res) => {
 
             res.status(400).send({
                 Status: false,
-                Message: 'Users Not Deleted Con You Pleace Provide Id!',
+                Message: 'User Not Deleted Con You Pleace Provide Id!',
 
             })
         }
